@@ -64,5 +64,4 @@ const AddStory = () => {
         </div>
     );
 };
-
 export default AddStory;
