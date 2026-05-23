@@ -1,10 +1,23 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../App.css";
 import { StoryView } from "./StoryView";
+// import { timeAgo } from "./Date";
+// import { jsx } from "react/jsx-runtime";
 
 export function AddStory() {
-    const [stories, setStories] = useState([]);
+    // const [stories, setStories] = useState([]);
     const fileRef = useRef(null);
+
+    const [stories, setStories] = useState(() => {
+        const savedStories = localStorage.getItem("stories");
+        return savedStories ? JSON.parse(savedStories) : [];
+    });
+
+
+    useEffect(() => {
+        localStorage.setItem('stories', JSON.stringify(stories));
+    }, [stories]);
+
 
     const handleClick = () => {
         fileRef.current?.click();
@@ -12,9 +25,21 @@ export function AddStory() {
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
+
         if (file) {
-            const imageUrl = URL.createObjectURL(file);
-            setStories((prev) => [...prev, imageUrl]);
+
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                const newStory = {
+                    image: reader.result,
+                    createdAt: new Date(),
+                };
+
+                setStories((prev) => [...prev, newStory]);
+            };
+
+            reader.readAsDataURL(file);
         }
     };
 

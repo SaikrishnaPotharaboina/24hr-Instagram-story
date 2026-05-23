@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { timeAgo } from "./Date";
 
 export const StoryView = ({ stories }) => {
     const [selectedStory, setSelectedStory] = useState(null);
@@ -64,11 +65,12 @@ export const StoryView = ({ stories }) => {
                 >
                     <div className="w-[78px] h-[78px] rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 p-[2.5px] flex items-center justify-center">
                         <img
-                            src={story}
+                            src={story.image}
                             alt={`story-${index}`}
                             className="w-full h-full rounded-full object-cover border-2 border-white"
                         />
                     </div>
+                    <p>{timeAgo(story.createdAt)}</p>
                 </div>
             ))}
 
@@ -92,7 +94,7 @@ export const StoryView = ({ stories }) => {
                         </button>
 
                         <img
-                            src={selectedStory}
+                            src={selectedStory.image}
                             alt="story-view"
                             className="w-full h-full object-cover"
                         />
