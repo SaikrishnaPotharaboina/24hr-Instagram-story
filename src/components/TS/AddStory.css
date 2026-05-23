@@ -1,4 +1,7 @@
-.container {
+@import "tailwindcss";
+
+
+/* .container {
     display: flex;
     padding: 20px;
 }
@@ -18,10 +21,10 @@
     height: 80px;
     border-radius: 50%;
     /* border: 3px solid #ff0050; */
-    object-fit: cover;
+/* object-fit: cover;
 }
 
 .text {
     margin-top: 8px;
     font-size: 14px;
-}
+} */
